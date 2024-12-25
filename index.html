@@ -18,7 +18,10 @@
       <label for = "pages"> Total Pages Read: </label>
       <input type = "number" id = "pages" name = "book_pages_read" required>
       <label for = "hasRead"> Finished: </label>
-      <input type = "checkbox" id = "hasRead" name = "book_finished" value = true >
+      <select id = "hasRead" name = "book_finished"> 
+        <option value = "true"> Yes </option>
+        <option value = "false"> No </option>
+      </select>
       <button type = "submit"> Submit </button>
     </form>
   </div>

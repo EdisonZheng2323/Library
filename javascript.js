@@ -10,12 +10,13 @@ function Book(author, title, pages, read){
 
 
 Book.prototype.hasRead = function () {
-  if(this.read === true){
-    this.read = false;
+  if(this.read == "true"){
+    this.read = "false";
   }
   else{
-    this.read = true;
+    this.read = "true";
   }
+
 }
 
 function addBookToLibrary(author, title, pages, read){
@@ -28,9 +29,36 @@ function addBookToLibrary(author, title, pages, read){
 function displayBook(){
   let book = myLibrary[numOfBooks - 1];
   let card = document.createElement("div");
-  card.classList.add("card");
+  card.classList.add(`card${numOfBooks}`);
   card.textContent = `Title: ${book.title} \n Author: ${book.author} \n Total Pages Read: ${book.pages} \n Finished: ${book.read}`; 
   card.style.whiteSpace = "pre-line";
+  let readButton = document.createElement("button");
+  readButton.classList.add("readButton");
+  readButton.textContent = "Change Status?";
+  readButton.addEventListener("click", () => {
+    book.hasRead();
+    card.textContent = `Title: ${book.title} \n Author: ${book.author} \n Total Pages Read: ${book.pages} \n Finished: ${book.read}`; 
+    card.appendChild(readButton);
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("deleteButton");
+    deleteButton.textContent = "Delete Book?";
+    deleteButton.addEventListener("click", () => {
+    myLibrary.pop();
+    numOfBooks--;
+    card.remove();
+  })
+  card.appendChild(deleteButton);
+  });
+  card.appendChild(readButton);
+  let deleteButton = document.createElement("button");
+  deleteButton.classList.add("deleteButton");
+  deleteButton.textContent = "Delete Book?";
+  deleteButton.addEventListener("click", () => {
+    myLibrary.pop();
+    numOfBooks--;
+    card.remove();
+  })
+  card.appendChild(deleteButton);
   let container = document.querySelector(".container");
   container.appendChild(card);
 }
@@ -42,7 +70,6 @@ form.addEventListener("submit", function(event) {
   const title = data.get("book_title");
   const author = data.get("book_author");
   const pages = data.get("book_pages_read");
-  const finished = document.querySelector("#hasRead").checked;
+  const finished = data.get("book_finished")
   addBookToLibrary(author, title, pages, finished);
 });
-
