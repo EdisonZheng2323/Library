@@ -1,23 +1,24 @@
 const myLibrary = [];
 let numOfBooks = 0;
 
-function Book(author, title, pages, read){
-  this.author = author;
-  this.title = title;
-  this.pages = pages;
-  this.read = read;
-}
-
-
-Book.prototype.hasRead = function () {
-  if(this.read == "true"){
-    this.read = "false";
-  }
-  else{
-    this.read = "true";
+class Book {
+  constructor(author, title, pages, read){
+    this.author = author;
+    this.title = title;
+    this.pages = pages;
+    this.read = read;
   }
 
+  hasRead() {
+    if(this.read == "true"){
+      this.read = "false";
+    }
+    else{
+      this.read = "true";
+    }
+  }
 }
+
 
 function addBookToLibrary(author, title, pages, read){
   let book = new Book(author, title, pages, read);
